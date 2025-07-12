@@ -8,6 +8,6 @@ import (
 func main() {
 	fmt.Println("Math package is ready to use.")
 	http.HandleFunc("/add", AdditionHandler)
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe("0.0.0.0:3000", nil)
 
 }
