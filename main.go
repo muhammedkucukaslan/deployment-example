@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
-	godotenv.Load()
+	if err := godotenv.Load(); err != nil {
+		fmt.Println("Error loading .env file")
+	}
 	PORT := os.Getenv("PORT")
 	fmt.Println("Math package is ready to use.")
 	http.HandleFunc("/add", AdditionHandler)
