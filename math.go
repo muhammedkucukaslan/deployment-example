@@ -25,3 +25,16 @@ func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, `{"message": "Hello, World!"}`)
 }
+
+func SquareHandler(w http.ResponseWriter, r *http.Request) {
+	path := r.URL.Path[len("/square/"):] // "5"
+
+	numInt, err := strconv.Atoi(path)
+	if err != nil {
+		http.Error(w, "Invalid number", http.StatusBadRequest)
+		return
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, `{"result": %d}`, numInt*numInt)
+}

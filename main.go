@@ -16,6 +16,7 @@ func main() {
 	fmt.Println("Math package is ready to use.")
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("/square/", SquareHandler)
 	mux.HandleFunc("/add", AdditionHandler)
 	mux.HandleFunc("/env", DotenvHandler)
 	mux.HandleFunc("/hello", HelloWorldHandler)
