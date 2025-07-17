@@ -45,3 +45,7 @@ jobs:
          context: .
          push: true
          tags: muhammedkucukaslan/deployment-example:latest
+        
+    - name: Deploy to Dokploy
+      run: |
+        curl  ${{ secrets.DOKPLOY_REDEPLOY_URL }}
