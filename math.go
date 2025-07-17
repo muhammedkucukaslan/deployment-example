@@ -25,21 +25,3 @@ func HelloWorldHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, `{"message": "Hello, World!"}`)
 }
-
-func SquareHandler(w http.ResponseWriter, r *http.Request) {
-	var xInt int
-	if err := r.ParseForm(); err != nil {
-		http.Error(w, "Invalid form data", http.StatusBadRequest)
-		return
-	}
-	x := r.FormValue("x")
-	xInt, err := strconv.Atoi(x)
-	if err != nil {
-		http.Error(w, "Invalid value for x", http.StatusBadRequest)
-		return
-	}
-	result := xInt * xInt
-
-	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprintf(w, `{"result": %d}`, result)
-}
