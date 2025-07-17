@@ -14,12 +14,14 @@ func main() {
 	}
 	PORT := os.Getenv("PORT")
 	fmt.Println("Math package is ready to use.")
-	http.Handle("/", LoggerMiddleware(http.DefaultServeMux))
-	http.HandleFunc("/add", AdditionHandler)
-	http.HandleFunc("/env", DotenvHandler)
-	http.HandleFunc("/hello", HelloWorldHandler)
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/add", AdditionHandler)
+	mux.HandleFunc("/env", DotenvHandler)
+	mux.HandleFunc("/hello", HelloWorldHandler)
+
 	fmt.Println("Server is running on http://localhost:" + PORT + "/")
-	http.ListenAndServe(":"+PORT, nil)
+	http.ListenAndServe(":"+PORT, LoggerMiddleware(mux))
 
 }
 
